@@ -11,7 +11,7 @@ namespace MunicipalServiceApplication
         /// <summary>
         /// Global static list decleration to emulate the database storing the Issure Reports 
         /// </summary>
-        public static List<IssueReport> issueReports = new List<IssueReport>();
+        public static int userId;
         //---------------------------------------------------------------------------------------------------------------------------------
     }
 }

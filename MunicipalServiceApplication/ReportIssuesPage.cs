@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using MunicipalServiceApplication.Controllers;
 
 namespace MunicipalServiceApplication
 {
@@ -23,6 +24,11 @@ namespace MunicipalServiceApplication
         bool descriptionChanged;
         bool fileAttached;
         //---------------------------------------------------------------------------------------------------------------------------------
+        private IssueController controller;
+        private bool isMenuCollapsed = true; // Start in a collapsed state
+        private int menuWidth = 250; // Full width of the menu
+        private int collapsedWidth = 40; // Collapsed width of the menu
+        private int stepSize = 30;
         /// <summary>
         /// Method that runs when the page is loaded, ensures progress bar is nothing, all errors are cleared and the combo box has values
         /// </summary>
@@ -33,6 +39,10 @@ namespace MunicipalServiceApplication
             categorySelected = false;
             descriptionChanged = false;
             fileAttached = false;
+            controller = new IssueController();
+
+            panelMenu.Width = collapsedWidth;
+            timerMenu.Interval = 30;
 
             PopulateComboBox();
             ClearErrors();
@@ -162,7 +172,6 @@ namespace MunicipalServiceApplication
         {
             Form1 form = new Form1();
             Validation val = new Validation();
-            int id;
             string location;
             string category;
             string description;
@@ -172,35 +181,31 @@ namespace MunicipalServiceApplication
 
             if (val.ValidState(txtBoxLocation.Text, cBoxCategory.SelectedIndex, txtBoxDescription.Text, fileData))
             {
-                if (GetSet.issueReports.Count <= 0)
-                {
-                    id = 1;
-                }
-                else
-                {
-                    id = GetSet.issueReports.Count + 1;
-                }
-
                 location = txtBoxLocation.Text;
                 category = cBoxCategory.Text;
                 description = txtBoxDescription.Text;
                 attachedFile = fileData; 
 
-                GetSet.issueReports.Add(new IssueReport(id, location, category, description, attachedFile));
-
-                if (this.WindowState == FormWindowState.Maximized)
+                if(controller.Report(location, category, description, attachedFile))
                 {
-                    form.WindowState = FormWindowState.Maximized;
+                    if (this.WindowState == FormWindowState.Maximized)
+                    {
+                        form.WindowState = FormWindowState.Maximized;
+                    }
+                    else
+                    {
+                        form.Size = this.Size;
+                        form.Location = this.Location;
+                    }
+
+                    form.Show();
+                    this.Hide();
+                    MessageBox.Show("Issue Reported");
                 }
                 else
                 {
-                    form.Size = this.Size;
-                    form.Location = this.Location;
+                    MessageBox.Show("Issue not Reported");
                 }
-
-                form.Show();
-                this.Hide();
-                MessageBox.Show("Issue Reported");
             }
             else
             {
@@ -306,44 +311,6 @@ namespace MunicipalServiceApplication
         }
         //---------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
-        /// Button to return to the menu
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnToMenu_Click(object sender, EventArgs e)
-        {
-            Form1 form = new Form1();
-
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                form.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                form.Size = this.Size;
-                form.Location = this.Location;
-            }
-
-            form.Show();
-            this.Hide();
-        }
-        //---------------------------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Buttons to say that these features are yet to be implimented
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EventsBtn_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("To Be Implemented");
-        }
-
-        private void RequestBtn_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("To Be Implemented");
-        }
-        //---------------------------------------------------------------------------------------------------------------------------------
-        /// <summary>
         /// Ensures that the application is closed when the apllication is stopped when the form is closed
         /// </summary>
         /// <param name="sender"></param>
@@ -351,6 +318,128 @@ namespace MunicipalServiceApplication
         private void ReportIssuesPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        //----------------------------------------------------------Nav Menu------------------------------------------------------------
+        private void btnToggleMenu_Click(object sender, EventArgs e)
+        {
+            timerMenu.Enabled = true;
+        }
+
+        private void timerMenu_Tick(object sender, EventArgs e)
+        {
+            if (isMenuCollapsed)
+            {
+                // Expand the menu
+                panelMenu.Width += stepSize;
+                if (panelMenu.Width >= menuWidth)
+                {
+                    // Stop expanding
+                    timerMenu.Enabled = false;
+                    panelMenu.Width = menuWidth; // Ensure exact size
+                    isMenuCollapsed = false;
+                }
+            }
+            else
+            {
+                // Collapse the menu
+                panelMenu.Width -= stepSize;
+                if (panelMenu.Width <= collapsedWidth)
+                {
+                    // Stop collapsing
+                    timerMenu.Enabled = false;
+                    panelMenu.Width = collapsedWidth; // Ensure exact size
+                    isMenuCollapsed = true;
+                }
+            }
+        }
+
+        private void navBtnIssue_Click(object sender, EventArgs e)
+        {
+            ReportIssuesPage reportIssuesPage = new ReportIssuesPage();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                reportIssuesPage.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                reportIssuesPage.Size = this.Size;
+                reportIssuesPage.Location = this.Location;
+            }
+
+            reportIssuesPage.Show();
+            this.Hide();
+        }
+
+        private void navBtnEvents_Click(object sender, EventArgs e)
+        {
+            EventsAndAnnouncements eventsAndAnnouncements = new EventsAndAnnouncements();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                eventsAndAnnouncements.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                eventsAndAnnouncements.Size = this.Size;
+                eventsAndAnnouncements.Location = this.Location;
+            }
+
+            eventsAndAnnouncements.Show();
+            this.Hide();
+        }
+
+        private void navBtnStatus_Click(object sender, EventArgs e)
+        {
+            RequestStatusPage requestStatusPage = new RequestStatusPage();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                requestStatusPage.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                requestStatusPage.Size = this.Size;
+                requestStatusPage.Location = this.Location;
+            }
+
+            requestStatusPage.Show();
+            this.Hide();
+        }
+
+        private void navBtnLogOut_Click(object sender, EventArgs e)
+        {
+            LoginForm login = new LoginForm();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                login.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                login.Size = this.Size;
+                login.Location = this.Location;
+            }
+
+            login.Show();
+            this.Hide();
+        }
+
+        private void navBtnHome_Click(object sender, EventArgs e)
+        {
+            if (!isMenuCollapsed)
+            {
+                timerMenu.Enabled = true;
+            }
+        }
+
+        private void ReportIssuesPage_Click(object sender, EventArgs e)
+        {
+            if (!isMenuCollapsed)
+            {
+                timerMenu.Enabled = true;
+            }
         }
         //---------------------------------------------------------------------------------------------------------------------------------
     }

@@ -12,9 +12,17 @@ namespace MunicipalServiceApplication
 {
     public partial class Form1 : Form
     {
+        private bool isMenuCollapsed = true; // Start in a collapsed state
+        private int menuWidth = 250; // Full width of the menu
+        private int collapsedWidth = 40; // Collapsed width of the menu
+        private int stepSize = 30;
+
         public Form1()
         {
             InitializeComponent();
+
+            panelMenu.Width = collapsedWidth;
+            timerMenu.Interval = 30;
         }
         //---------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -75,7 +83,20 @@ namespace MunicipalServiceApplication
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("To Be Implemented");
+            RequestStatusPage requestStatusPage = new RequestStatusPage();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                requestStatusPage.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                requestStatusPage.Size = this.Size;
+                requestStatusPage.Location = this.Location;
+            }
+
+            requestStatusPage.Show();
+            this.Hide();
         }
 
         private void button2_MouseHover(object sender, EventArgs e)
@@ -106,6 +127,131 @@ namespace MunicipalServiceApplication
         private void button3_MouseLeave(object sender, EventArgs e)
         {
             button3.BackColor = Color.White;
+        }
+
+
+
+        //----------------------------------------------------------Nav Menu------------------------------------------------------------
+        private void btnToggleMenu_Click(object sender, EventArgs e)
+        {
+            timerMenu.Enabled = true;
+        }
+
+
+        private void timerMenu_Tick(object sender, EventArgs e)
+        {
+            if (isMenuCollapsed)
+            {
+                // Expand the menu
+                panelMenu.Width += stepSize;
+                if (panelMenu.Width >= menuWidth)
+                {
+                    // Stop expanding
+                    timerMenu.Enabled = false;
+                    panelMenu.Width = menuWidth; // Ensure exact size
+                    isMenuCollapsed = false;
+                }
+            }
+            else
+            {
+                // Collapse the menu
+                panelMenu.Width -= stepSize;
+                if (panelMenu.Width <= collapsedWidth)
+                {
+                    // Stop collapsing
+                    timerMenu.Enabled = false;
+                    panelMenu.Width = collapsedWidth; // Ensure exact size
+                    isMenuCollapsed = true;
+                }
+            }
+        }
+
+        private void tableLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!isMenuCollapsed)
+            {
+                timerMenu.Enabled = true;
+            }
+        }
+
+        private void navBtnIssue_Click(object sender, EventArgs e)
+        {
+            ReportIssuesPage reportIssuesPage = new ReportIssuesPage();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                reportIssuesPage.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                reportIssuesPage.Size = this.Size;
+                reportIssuesPage.Location = this.Location;
+            }
+
+            reportIssuesPage.Show();
+            this.Hide();
+        }
+
+        private void navBtnEvents_Click(object sender, EventArgs e)
+        {
+            EventsAndAnnouncements eventsAndAnnouncements = new EventsAndAnnouncements();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                eventsAndAnnouncements.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                eventsAndAnnouncements.Size = this.Size;
+                eventsAndAnnouncements.Location = this.Location;
+            }
+
+            eventsAndAnnouncements.Show();
+            this.Hide();
+        }
+
+        private void navBtnStatus_Click(object sender, EventArgs e)
+        {
+            RequestStatusPage requestStatusPage = new RequestStatusPage();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                requestStatusPage.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                requestStatusPage.Size = this.Size;
+                requestStatusPage.Location = this.Location;
+            }
+
+            requestStatusPage.Show();
+            this.Hide();
+        }
+
+        private void navBtnLogOut_Click(object sender, EventArgs e) 
+        {
+            LoginForm login = new LoginForm();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                login.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                login.Size = this.Size;
+                login.Location = this.Location;
+            }
+
+            login.Show();
+            this.Hide();
+        }
+
+        private void navBtnHome_Click(object sender, EventArgs e)
+        {
+            if (!isMenuCollapsed)
+            {
+                timerMenu.Enabled = true;
+            }
         }
         //---------------------------------------------------------------------------------------------------------------------------------
     }

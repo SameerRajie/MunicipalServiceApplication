@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtBoxLocation = new System.Windows.Forms.TextBox();
             this.cBoxCategory = new System.Windows.Forms.ComboBox();
             this.txtBoxDescription = new System.Windows.Forms.RichTextBox();
             this.btnAttachFile = new System.Windows.Forms.Button();
             this.pBarEngagement = new System.Windows.Forms.ProgressBar();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.btnToMenu = new System.Windows.Forms.Button();
             this.lblHeading = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,8 +44,15 @@
             this.lblDescriptionError = new System.Windows.Forms.Label();
             this.lblAttachFileError = new System.Windows.Forms.Label();
             this.lblProgress = new System.Windows.Forms.Label();
-            this.EventsBtn = new System.Windows.Forms.Button();
-            this.RequestBtn = new System.Windows.Forms.Button();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.navBtnLogOut = new System.Windows.Forms.Button();
+            this.navBtnStatus = new System.Windows.Forms.Button();
+            this.navBtnEvents = new System.Windows.Forms.Button();
+            this.navBtnIssue = new System.Windows.Forms.Button();
+            this.navBtnHome = new System.Windows.Forms.Button();
+            this.btnToggleMenu = new System.Windows.Forms.Button();
+            this.timerMenu = new System.Windows.Forms.Timer(this.components);
+            this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtBoxLocation
@@ -94,11 +101,11 @@
             this.pBarEngagement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pBarEngagement.ForeColor = System.Drawing.Color.Yellow;
-            this.pBarEngagement.Location = new System.Drawing.Point(18, 596);
+            this.pBarEngagement.Location = new System.Drawing.Point(90, 596);
             this.pBarEngagement.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pBarEngagement.Maximum = 4;
             this.pBarEngagement.Name = "pBarEngagement";
-            this.pBarEngagement.Size = new System.Drawing.Size(1268, 60);
+            this.pBarEngagement.Size = new System.Drawing.Size(1151, 60);
             this.pBarEngagement.TabIndex = 4;
             // 
             // btnSubmit
@@ -111,18 +118,6 @@
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
-            // 
-            // btnToMenu
-            // 
-            this.btnToMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToMenu.Location = new System.Drawing.Point(1164, 21);
-            this.btnToMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnToMenu.Name = "btnToMenu";
-            this.btnToMenu.Size = new System.Drawing.Size(133, 60);
-            this.btnToMenu.TabIndex = 6;
-            this.btnToMenu.Text = "Back To Menu";
-            this.btnToMenu.UseVisualStyleBackColor = true;
-            this.btnToMenu.Click += new System.EventHandler(this.btnToMenu_Click);
             // 
             // lblHeading
             // 
@@ -222,36 +217,94 @@
             this.lblProgress.TabIndex = 13;
             this.lblProgress.Text = "0%";
             // 
-            // EventsBtn
+            // panelMenu
             // 
-            this.EventsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.EventsBtn.Location = new System.Drawing.Point(821, 21);
-            this.EventsBtn.Name = "EventsBtn";
-            this.EventsBtn.Size = new System.Drawing.Size(161, 60);
-            this.EventsBtn.TabIndex = 14;
-            this.EventsBtn.Text = "Events and Annoouncements";
-            this.EventsBtn.UseVisualStyleBackColor = true;
-            this.EventsBtn.Click += new System.EventHandler(this.EventsBtn_Click);
+            this.panelMenu.BackColor = System.Drawing.Color.Red;
+            this.panelMenu.Controls.Add(this.navBtnLogOut);
+            this.panelMenu.Controls.Add(this.navBtnStatus);
+            this.panelMenu.Controls.Add(this.navBtnEvents);
+            this.panelMenu.Controls.Add(this.navBtnIssue);
+            this.panelMenu.Controls.Add(this.navBtnHome);
+            this.panelMenu.Controls.Add(this.btnToggleMenu);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenu.ForeColor = System.Drawing.Color.Black;
+            this.panelMenu.Location = new System.Drawing.Point(0, 0);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(61, 699);
+            this.panelMenu.TabIndex = 15;
             // 
-            // RequestBtn
+            // navBtnLogOut
             // 
-            this.RequestBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RequestBtn.Location = new System.Drawing.Point(1008, 21);
-            this.RequestBtn.Name = "RequestBtn";
-            this.RequestBtn.Size = new System.Drawing.Size(133, 60);
-            this.RequestBtn.TabIndex = 14;
-            this.RequestBtn.Text = "Request Status";
-            this.RequestBtn.UseVisualStyleBackColor = true;
-            this.RequestBtn.Click += new System.EventHandler(this.RequestBtn_Click);
+            this.navBtnLogOut.Location = new System.Drawing.Point(60, 544);
+            this.navBtnLogOut.Name = "navBtnLogOut";
+            this.navBtnLogOut.Size = new System.Drawing.Size(285, 55);
+            this.navBtnLogOut.TabIndex = 1;
+            this.navBtnLogOut.Text = "Log Out";
+            this.navBtnLogOut.UseVisualStyleBackColor = true;
+            this.navBtnLogOut.Click += new System.EventHandler(this.navBtnLogOut_Click);
+            // 
+            // navBtnStatus
+            // 
+            this.navBtnStatus.Location = new System.Drawing.Point(60, 326);
+            this.navBtnStatus.Name = "navBtnStatus";
+            this.navBtnStatus.Size = new System.Drawing.Size(285, 55);
+            this.navBtnStatus.TabIndex = 1;
+            this.navBtnStatus.Text = "Request Status";
+            this.navBtnStatus.UseVisualStyleBackColor = true;
+            this.navBtnStatus.Click += new System.EventHandler(this.navBtnStatus_Click);
+            // 
+            // navBtnEvents
+            // 
+            this.navBtnEvents.Location = new System.Drawing.Point(60, 265);
+            this.navBtnEvents.Name = "navBtnEvents";
+            this.navBtnEvents.Size = new System.Drawing.Size(283, 55);
+            this.navBtnEvents.TabIndex = 1;
+            this.navBtnEvents.Text = "Events and Announcements";
+            this.navBtnEvents.UseVisualStyleBackColor = true;
+            this.navBtnEvents.Click += new System.EventHandler(this.navBtnEvents_Click);
+            // 
+            // navBtnIssue
+            // 
+            this.navBtnIssue.Location = new System.Drawing.Point(60, 204);
+            this.navBtnIssue.Name = "navBtnIssue";
+            this.navBtnIssue.Size = new System.Drawing.Size(283, 55);
+            this.navBtnIssue.TabIndex = 1;
+            this.navBtnIssue.Text = "Report Issue";
+            this.navBtnIssue.UseVisualStyleBackColor = true;
+            this.navBtnIssue.Click += new System.EventHandler(this.navBtnIssue_Click);
+            // 
+            // navBtnHome
+            // 
+            this.navBtnHome.Location = new System.Drawing.Point(60, 143);
+            this.navBtnHome.Name = "navBtnHome";
+            this.navBtnHome.Size = new System.Drawing.Size(283, 55);
+            this.navBtnHome.TabIndex = 1;
+            this.navBtnHome.Text = "Home";
+            this.navBtnHome.UseVisualStyleBackColor = true;
+            this.navBtnHome.Click += new System.EventHandler(this.navBtnHome_Click);
+            // 
+            // btnToggleMenu
+            // 
+            this.btnToggleMenu.BackgroundImage = global::MunicipalServiceApplication.Properties.Resources.three_lines1;
+            this.btnToggleMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnToggleMenu.Location = new System.Drawing.Point(0, 0);
+            this.btnToggleMenu.Name = "btnToggleMenu";
+            this.btnToggleMenu.Size = new System.Drawing.Size(59, 60);
+            this.btnToggleMenu.TabIndex = 0;
+            this.btnToggleMenu.UseVisualStyleBackColor = true;
+            this.btnToggleMenu.Click += new System.EventHandler(this.btnToggleMenu_Click);
+            // 
+            // timerMenu
+            // 
+            this.timerMenu.Tick += new System.EventHandler(this.timerMenu_Tick);
             // 
             // ReportIssuesPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Red;
-            this.ClientSize = new System.Drawing.Size(1304, 699);
-            this.Controls.Add(this.RequestBtn);
-            this.Controls.Add(this.EventsBtn);
+            this.ClientSize = new System.Drawing.Size(1259, 699);
+            this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.lblAttachFileError);
             this.Controls.Add(this.lblDescriptionError);
@@ -261,7 +314,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblHeading);
-            this.Controls.Add(this.btnToMenu);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.pBarEngagement);
             this.Controls.Add(this.btnAttachFile);
@@ -272,6 +324,8 @@
             this.Name = "ReportIssuesPage";
             this.Text = "ReportIssuesPage";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReportIssuesPage_FormClosing);
+            this.Click += new System.EventHandler(this.ReportIssuesPage_Click);
+            this.panelMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,7 +339,6 @@
         private System.Windows.Forms.Button btnAttachFile;
         private System.Windows.Forms.ProgressBar pBarEngagement;
         private System.Windows.Forms.Button btnSubmit;
-        private System.Windows.Forms.Button btnToMenu;
         private System.Windows.Forms.Label lblHeading;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -295,7 +348,13 @@
         private System.Windows.Forms.Label lblDescriptionError;
         private System.Windows.Forms.Label lblAttachFileError;
         private System.Windows.Forms.Label lblProgress;
-        private System.Windows.Forms.Button EventsBtn;
-        private System.Windows.Forms.Button RequestBtn;
+        private System.Windows.Forms.Panel panelMenu;
+        private System.Windows.Forms.Button navBtnLogOut;
+        private System.Windows.Forms.Button navBtnStatus;
+        private System.Windows.Forms.Button navBtnEvents;
+        private System.Windows.Forms.Button navBtnIssue;
+        private System.Windows.Forms.Button navBtnHome;
+        private System.Windows.Forms.Button btnToggleMenu;
+        private System.Windows.Forms.Timer timerMenu;
     }
 }

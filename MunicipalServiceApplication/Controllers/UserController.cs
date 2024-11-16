@@ -35,6 +35,8 @@ namespace MunicipalServiceApplication.Controllers
                 return false; // User not found
             }
 
+            GetSet.userId = int.Parse(db.GetUser(username));
+
             return VerifyPassword(password, storedHashedPassword);
         }
 
