@@ -12,11 +12,17 @@ namespace MunicipalServiceApplication
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Variable dictating the state of the nav panel
+        /// </summary>
         private bool isMenuCollapsed = true; // Start in a collapsed state
         private int menuWidth = 250; // Full width of the menu
         private int collapsedWidth = 40; // Collapsed width of the menu
         private int stepSize = 30;
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Ensures that the nav panel starts collapsed
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -59,7 +65,7 @@ namespace MunicipalServiceApplication
         }
         //---------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
-        /// Buttons to show that these still need to be implemented
+        /// Buttons to Navigate to the events and announcements page
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -80,7 +86,12 @@ namespace MunicipalServiceApplication
             eventsAndAnnouncements.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Button to navigate to the Request Status page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
             RequestStatusPage requestStatusPage = new RequestStatusPage();
@@ -98,7 +109,12 @@ namespace MunicipalServiceApplication
             requestStatusPage.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Methods to change the colours of the buttons based on if the mouse is hovered over it or not
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_MouseHover(object sender, EventArgs e)
         {
             button2.BackColor = Color.Green;
@@ -128,16 +144,19 @@ namespace MunicipalServiceApplication
         {
             button3.BackColor = Color.White;
         }
-
-
+        //---------------------------------------------------------------------------------------------------------------------------------
 
         //----------------------------------------------------------Nav Menu------------------------------------------------------------
         private void btnToggleMenu_Click(object sender, EventArgs e)
         {
             timerMenu.Enabled = true;
         }
-
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Timer method to open and close the panel smoothly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerMenu_Tick(object sender, EventArgs e)
         {
             if (isMenuCollapsed)
@@ -165,7 +184,7 @@ namespace MunicipalServiceApplication
                 }
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void tableLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
         {
             if (!isMenuCollapsed)
@@ -173,7 +192,7 @@ namespace MunicipalServiceApplication
                 timerMenu.Enabled = true;
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnIssue_Click(object sender, EventArgs e)
         {
             ReportIssuesPage reportIssuesPage = new ReportIssuesPage();
@@ -191,7 +210,7 @@ namespace MunicipalServiceApplication
             reportIssuesPage.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnEvents_Click(object sender, EventArgs e)
         {
             EventsAndAnnouncements eventsAndAnnouncements = new EventsAndAnnouncements();
@@ -209,7 +228,7 @@ namespace MunicipalServiceApplication
             eventsAndAnnouncements.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnStatus_Click(object sender, EventArgs e)
         {
             RequestStatusPage requestStatusPage = new RequestStatusPage();
@@ -227,7 +246,7 @@ namespace MunicipalServiceApplication
             requestStatusPage.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnLogOut_Click(object sender, EventArgs e) 
         {
             LoginForm login = new LoginForm();
@@ -245,7 +264,7 @@ namespace MunicipalServiceApplication
             login.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnHome_Click(object sender, EventArgs e)
         {
             if (!isMenuCollapsed)

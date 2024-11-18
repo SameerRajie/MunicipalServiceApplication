@@ -13,14 +13,21 @@ namespace MunicipalServiceApplication
 {
     public partial class RequestStatusPage : Form
     {
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Variables for the collections and controller
+        /// </summary>
         private BinarySearchTree bst;
         private IssueController issueController;
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private bool isMenuCollapsed = true; // Start in a collapsed state
         private int menuWidth = 250; // Full width of the menu
         private int collapsedWidth = 40; // Collapsed width of the menu
         private int stepSize = 30;
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Calls all methods necessary for when the page is opened
+        /// </summary>
         public RequestStatusPage()
         {
             InitializeComponent();
@@ -42,7 +49,10 @@ namespace MunicipalServiceApplication
             panelMenu.Width = collapsedWidth;
             timerMenu.Interval = 30;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Sets the columns of the data grid view
+        /// </summary>
         private void InitializeDataGridView()
         {
             // Clear any existing columns
@@ -113,7 +123,10 @@ namespace MunicipalServiceApplication
             // Set AutoGenerateColumns to false
             dataGridView1.AutoGenerateColumns = false;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Adds the databases data to the binary search tree
+        /// </summary>
         private void AddData()
         {
             foreach (IssueReport report in issueController.GetReports(GetSet.userId))
@@ -121,7 +134,10 @@ namespace MunicipalServiceApplication
                 bst.Insert(report);
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Displays all of the requests on the grid view, in whichever order is selected
+        /// </summary>
         private void DisplayAllRequests()
         {
             dataGridView1.Rows.Clear();
@@ -162,13 +178,9 @@ namespace MunicipalServiceApplication
                 StatusGraph statusGraph = new StatusGraph();
 
                 // Define the valid statuses in their desired order
-                List<string> statusOrder = new List<string> { "in progress", "pending", "resolved" };
-
-                // Add statuses as nodes in the graph
-                foreach (string status in statusOrder)
-                {
-                    statusGraph.AddStatus(status);
-                }
+                statusGraph.AddStatus("in progress");
+                statusGraph.AddStatus("pending");
+                statusGraph.AddStatus("resolved");
 
                 // Traverse the BST and add requests to the graph
                 bst.TraverseInOrder(request =>
@@ -177,7 +189,7 @@ namespace MunicipalServiceApplication
                 });
 
                 // Perform a topological traversal of the statuses
-                List<IssueReport> sortedRequests = statusGraph.TraverseStatusesInOrder(statusOrder);
+                var sortedRequests = statusGraph.TraverseStatusesInOrder();
 
                 // Display the sorted requests in the DataGridView
                 foreach (var request in sortedRequests)
@@ -186,8 +198,11 @@ namespace MunicipalServiceApplication
                 }
             }
         }
-
-        // Helper method to add a request to the DataGridView
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Method to add the request to the data grid view and change the colour of the status cell depending
+        /// </summary>
+        /// <param name="request"></param>
         private void AddRequestToGrid(IssueReport request)
         {
             int rowIndex = dataGridView1.Rows.Add(request.Id, request.Location, request.Category, request.Description, request.Priority, request.Status);
@@ -210,8 +225,12 @@ namespace MunicipalServiceApplication
                     break;
             }
         }
-
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Method that will search the list based on the input
+        /// </summary>
+        /// <param name="searchInput"></param>
+        /// <returns></returns>
         private bool SearchList(string searchInput)
         {
             // Clear the DataGridView
@@ -227,7 +246,12 @@ namespace MunicipalServiceApplication
 
             return results.Any();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Button to search the requests
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string searchInput = txtBoxSearch.Text.Trim();
@@ -241,34 +265,53 @@ namespace MunicipalServiceApplication
                 MessageBox.Show("No matching service requests found.");
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Calls the search method when the text box text is changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtBoxSearch_TextChanged(object sender, EventArgs e)
         {
             SearchList(txtBoxSearch.Text.Trim());
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Ensures that the application stops when the form is closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RequestStatusPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Populates combo box and sets default value
+        /// </summary>
         private void InitializeComboBox()
         {
             cBoxSort.Items.Add("Priority");
             cBoxSort.Items.Add("Status");
             cBoxSort.SelectedIndex = 0; // Default to "Sort by Priority"
         }
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Calls method to display requests when combo box value is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             DisplayAllRequests();
         }
-
-        //----------------------------------------------------------Nav Menu------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------Nav Menu---------------------------------------------------------------
         private void btnToggleMenu_Click(object sender, EventArgs e)
         {
             timerMenu.Enabled = true;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnIssue_Click(object sender, EventArgs e)
         {
             ReportIssuesPage reportIssue = new ReportIssuesPage();
@@ -286,7 +329,7 @@ namespace MunicipalServiceApplication
             reportIssue.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnEvents_Click(object sender, EventArgs e)
         {
             EventsAndAnnouncements eventsAndAnnouncements = new EventsAndAnnouncements();
@@ -304,7 +347,7 @@ namespace MunicipalServiceApplication
             eventsAndAnnouncements.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnStatus_Click(object sender, EventArgs e)
         {
             if (!isMenuCollapsed)
@@ -312,7 +355,7 @@ namespace MunicipalServiceApplication
                 timerMenu.Enabled = true;
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnLogOut_Click(object sender, EventArgs e)
         {
             LoginForm login = new LoginForm();
@@ -330,7 +373,7 @@ namespace MunicipalServiceApplication
             login.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnHome_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
@@ -348,7 +391,12 @@ namespace MunicipalServiceApplication
             form.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Timer method to open and close the panel smoothly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerMenu_Tick(object sender, EventArgs e)
         {
             if (isMenuCollapsed)
@@ -376,7 +424,7 @@ namespace MunicipalServiceApplication
                 }
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void RequestStatusPage_Click(object sender, EventArgs e)
         {
             if (!isMenuCollapsed)
@@ -384,7 +432,6 @@ namespace MunicipalServiceApplication
                 timerMenu.Enabled = true;
             }
         }
-
-
+        //---------------------------------------------------------------------------------------------------------------------------------
     }
 }

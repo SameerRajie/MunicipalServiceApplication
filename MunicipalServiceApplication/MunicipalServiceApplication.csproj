@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Announcement.cs" />
+    <Compile Include="AVLNode.cs" />
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="Controllers\DbHelper.cs" />
     <Compile Include="Controllers\EventsAndAnnouncementsController.cs" />

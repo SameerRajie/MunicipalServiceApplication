@@ -20,6 +20,7 @@ namespace MunicipalServiceApplication
         private int stepSize = 30;
 
         private EventsAndAnnouncementsController controller;
+        //---------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Calls methods necessary when the page is first loaded
         /// </summary>
@@ -291,7 +292,12 @@ namespace MunicipalServiceApplication
 
             AdjustListViewHeight(lViewEvents);
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Button to search events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(txtBoxSearch.Text))
@@ -300,7 +306,12 @@ namespace MunicipalServiceApplication
             }
             SearchEvents();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Searches events each time the text box changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtBoxSearch_TextChanged(object sender, EventArgs e)
         {
             SearchEvents();
@@ -322,7 +333,12 @@ namespace MunicipalServiceApplication
         {
             timerMenu.Enabled = true;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Timer method to open and close the panel smoothly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerMenu_Tick_1(object sender, EventArgs e)
         {
             if (isMenuCollapsed)
@@ -350,7 +366,7 @@ namespace MunicipalServiceApplication
                 }
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnIssue_Click(object sender, EventArgs e)
         {
             ReportIssuesPage reportIssue = new ReportIssuesPage();
@@ -368,7 +384,7 @@ namespace MunicipalServiceApplication
             reportIssue.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnEvents_Click(object sender, EventArgs e)
         {
             if (!isMenuCollapsed)
@@ -376,7 +392,7 @@ namespace MunicipalServiceApplication
                 timerMenu.Enabled = true;
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnStatus_Click(object sender, EventArgs e)
         {
             RequestStatusPage requestStatusPage = new RequestStatusPage();
@@ -394,7 +410,7 @@ namespace MunicipalServiceApplication
             requestStatusPage.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnLogOut_Click(object sender, EventArgs e)
         {
             LoginForm login = new LoginForm();
@@ -412,7 +428,7 @@ namespace MunicipalServiceApplication
             login.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnHome_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
@@ -430,7 +446,7 @@ namespace MunicipalServiceApplication
             form.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void EventsAndAnnouncements_Click(object sender, EventArgs e)
         {
             if (!isMenuCollapsed)

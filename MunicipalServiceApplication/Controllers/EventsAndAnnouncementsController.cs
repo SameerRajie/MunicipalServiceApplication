@@ -10,29 +10,30 @@ namespace MunicipalServiceApplication.Controllers
 {
     public class EventsAndAnnouncementsController
     {
+        //---------------------------------------------------------------------------------------------------------------------------------
         private DbHelper db;
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         // Data structures to manage events and announcements
         private SortedDictionary<DateTime, List<Event>> eventsByDate = new SortedDictionary<DateTime, List<Event>>();
         private SortedDictionary<DateTime, List<Announcement>> announcementsByDate = new SortedDictionary<DateTime, List<Announcement>>();
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private Dictionary<string, List<Event>> eventsByCategory = new Dictionary<string, List<Event>>();
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private HashSet<string> eventCategories = new HashSet<string>();
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private Queue<Event> eventQueue = new Queue<Event>();
         private Queue<Announcement> announcementQueue = new Queue<Announcement>();
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private SortedList<DateTime, Event> eventPriorityQueue = new SortedList<DateTime, Event>();
         private SortedList<DateTime, Announcement> announcementPriorityQueue = new SortedList<DateTime, Announcement>();
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private Dictionary<string, int> userSearchPreferences = new Dictionary<string, int>();
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         public EventsAndAnnouncementsController()
         {
             db = new DbHelper();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         public List<Event> GetEvents()
         {
             List<Event> events = db.GetEvents();
@@ -195,7 +196,13 @@ namespace MunicipalServiceApplication.Controllers
                 userSearchPreferences[category] = 1;
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Method to filter events by category and/or date
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public IEnumerable<Event> FilterEventMethod(string category, DateTime date)
         {
             IEnumerable<Event> filteredEvents;
@@ -223,7 +230,12 @@ namespace MunicipalServiceApplication.Controllers
 
             return filteredEvents;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Method to filter events by text representing title or descriptions
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public List<Event> FilterEvents(string input)
         {
 
@@ -237,6 +249,7 @@ namespace MunicipalServiceApplication.Controllers
 
             return searchResults;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
     }
 }
+//--------------------------------------------------End of Code------------------------------------------------------------

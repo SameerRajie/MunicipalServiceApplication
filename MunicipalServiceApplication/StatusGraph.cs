@@ -9,10 +9,12 @@ namespace MunicipalServiceApplication
     public class StatusGraph
     {
         private readonly Dictionary<string, List<IssueReport>> adjacencyList;
+        private readonly AVLTree<string> statusOrderTree;
 
         public StatusGraph()
         {
             adjacencyList = new Dictionary<string, List<IssueReport>>();
+            statusOrderTree = new AVLTree<string>();
         }
 
         // Add a status node to the graph
@@ -21,6 +23,7 @@ namespace MunicipalServiceApplication
             if (!adjacencyList.ContainsKey(status))
             {
                 adjacencyList[status] = new List<IssueReport>();
+                statusOrderTree.Insert(status); // Add status to AVL Tree
             }
         }
 
@@ -33,12 +36,16 @@ namespace MunicipalServiceApplication
             }
         }
 
-        // Perform a topological sort to display statuses in the correct order
-        public List<IssueReport> TraverseStatusesInOrder(List<string> statusOrder)
+        // Perform a topological traversal of the statuses using AVL tree order
+        public List<IssueReport> TraverseStatusesInOrder()
         {
             List<IssueReport> sortedRequests = new List<IssueReport>();
 
-            foreach (string status in statusOrder)
+            // Get statuses in order from AVL Tree
+            List<string> sortedStatuses = statusOrderTree.InOrder();
+
+            // Collect requests for each status
+            foreach (string status in sortedStatuses)
             {
                 if (adjacencyList.ContainsKey(status))
                 {
@@ -49,5 +56,6 @@ namespace MunicipalServiceApplication
             return sortedRequests;
         }
     }
+
 
 }

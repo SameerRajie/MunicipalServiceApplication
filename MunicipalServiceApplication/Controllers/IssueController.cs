@@ -8,27 +8,49 @@ namespace MunicipalServiceApplication.Controllers
 {
     public class IssueController
     {
+        //---------------------------------------------------------------------------------------------------------------------------------
+        // Variable for the database helper
         private DbHelper db;
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initializes the DbHelper Class
+        /// </summary>
         public IssueController()
         {
             db = new DbHelper();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Calls the method to add the report to the database
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="category"></param>
+        /// <param name="description"></param>
+        /// <param name="attachedFile"></param>
+        /// <returns></returns>
         public bool Report(string location, string category, string description, byte[] attachedFile)
         {
             IssueReport report = new IssueReport(0, location, category, description, attachedFile, "Pending", 10);
             int userId = GetSet.userId;
             return db.AddIssue(report, userId);
         }
-
+        /// <summary>
+        /// Calls the method to get all reports made by the designated user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public List<IssueReport> GetReports(int userId)
         {
             List<IssueReport> reportList = db.GetIssues(userId);
 
             return reportList;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Generates dummy data for the Issues table based on the userId
+        /// Clears all previous entries
+        /// </summary>
+        /// <param name="userId"></param>
         public void GenerateDummyData(int userId)
         {
             db.ClearTable("Issues");
@@ -52,5 +74,7 @@ namespace MunicipalServiceApplication.Controllers
                 db.AddIssue(report, userId);
             }
         }
+        //---------------------------------------------------------------------------------------------------------------------------------
     }
 }
+//--------------------------------------------------End of Code------------------------------------------------------------

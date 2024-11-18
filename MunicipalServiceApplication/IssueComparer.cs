@@ -8,6 +8,12 @@ namespace MunicipalServiceApplication
 {
     internal class IssueComparer : IComparer<IssueReport>
     {
+        /// <summary>
+        /// Compares to issue reports based on the location, category, or Description, then returns the value if it is more that nothing
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public int Compare(IssueReport x, IssueReport y)
         {
             // Compare by Location
@@ -21,5 +27,7 @@ namespace MunicipalServiceApplication
             // Compare by Description
             return string.Compare(x.Description, y.Description, StringComparison.OrdinalIgnoreCase);
         }
+        //---------------------------------------------------------------------------------------------------------------------------------
     }
 }
+//--------------------------------------------------End of Code------------------------------------------------------------

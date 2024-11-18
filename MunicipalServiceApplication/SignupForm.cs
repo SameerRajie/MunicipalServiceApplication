@@ -13,15 +13,25 @@ namespace MunicipalServiceApplication
 {
     public partial class SignupForm : Form
     {
+        //Calls the UserController class
         private UserController userController;
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initializes the usercontroller variable to the class
+        /// Clears the password's error label
+        /// </summary>
         public SignupForm()
         {
             InitializeComponent();
             userController = new UserController();
             lblPasswordError.Text = string.Empty;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Button to create a new user using the input values
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSignup_Click(object sender, EventArgs e)
         {
             string username = txtNewUsername.Text;
@@ -57,7 +67,12 @@ namespace MunicipalServiceApplication
                 }
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Redirects the user to the login page when clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void linkLogin_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // Redirect to Login form
@@ -76,7 +91,12 @@ namespace MunicipalServiceApplication
             login.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Changes the password values characters to either * or normal letters
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cBoxShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (cBoxShowPassword.Checked)
@@ -88,7 +108,12 @@ namespace MunicipalServiceApplication
                 txtNewPassword.PasswordChar = '*';
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Changes the confirm password values characters to either * or normal letters
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cBoxShowConfirm_CheckedChanged(object sender, EventArgs e)
         {
             if (cBoxShowConfirm.Checked)
@@ -100,7 +125,12 @@ namespace MunicipalServiceApplication
                 txtConfirmPassword.PasswordChar = '*';
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Method to check that the password matches the requirements and updates the label accordingly
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private bool VerifyPassword(string password)
         {
             // Validation criteria
@@ -148,15 +178,27 @@ namespace MunicipalServiceApplication
                 return true;
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Calls the Verify Password method each time the text box value is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtNewPassword_TextChanged(object sender, EventArgs e)
         {
             VerifyPassword(txtNewPassword.Text);
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Ensures that the application is stopped when the form is closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SignupForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
+        //---------------------------------------------------------------------------------------------------------------------------------
     }
 }
+//--------------------------------------------------End of Code------------------------------------------------------------

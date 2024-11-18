@@ -9,7 +9,7 @@ namespace MunicipalServiceApplication
     internal class GetSet
     {
         /// <summary>
-        /// Global static list decleration to emulate the database storing the Issure Reports 
+        /// Global static Declaration to represent the logged in user
         /// </summary>
         public static int userId;
         //---------------------------------------------------------------------------------------------------------------------------------

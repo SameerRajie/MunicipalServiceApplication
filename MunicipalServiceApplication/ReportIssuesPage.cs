@@ -325,7 +325,12 @@ namespace MunicipalServiceApplication
         {
             timerMenu.Enabled = true;
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Timer method to open and close the panel smoothly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerMenu_Tick(object sender, EventArgs e)
         {
             if (isMenuCollapsed)
@@ -353,7 +358,7 @@ namespace MunicipalServiceApplication
                 }
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnIssue_Click(object sender, EventArgs e)
         {
             if (!isMenuCollapsed)
@@ -361,7 +366,7 @@ namespace MunicipalServiceApplication
                 timerMenu.Enabled = true;
             }
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnEvents_Click(object sender, EventArgs e)
         {
             EventsAndAnnouncements eventsAndAnnouncements = new EventsAndAnnouncements();
@@ -379,7 +384,7 @@ namespace MunicipalServiceApplication
             eventsAndAnnouncements.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnStatus_Click(object sender, EventArgs e)
         {
             RequestStatusPage requestStatusPage = new RequestStatusPage();
@@ -397,7 +402,7 @@ namespace MunicipalServiceApplication
             requestStatusPage.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnLogOut_Click(object sender, EventArgs e)
         {
             LoginForm login = new LoginForm();
@@ -415,7 +420,7 @@ namespace MunicipalServiceApplication
             login.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void navBtnHome_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
@@ -433,7 +438,7 @@ namespace MunicipalServiceApplication
             form.Show();
             this.Hide();
         }
-
+        //---------------------------------------------------------------------------------------------------------------------------------
         private void ReportIssuesPage_Click(object sender, EventArgs e)
         {
             if (!isMenuCollapsed)
