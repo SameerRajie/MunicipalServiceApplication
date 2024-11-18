@@ -10,11 +10,9 @@ How to Clone From GitHub
 GitHub Repository: https://github.com/SameerRajie/MunicipalServiceApplication.git
 •	Go to the GitHub repository through the link.
 •	Click on the “Code” dropdown on the top right of the code section.
-•	Choose the download zip option.
-•	Navigate to where the zip folder was saved, right-click the zip folder and extract all.
+•	Choose Open in Visual Studio
 Compiling and running the application:
-•	Enter the unzipped folder, then the next folder, or until you see a ‘.sln’ file, double-click that file.
-•	If the correct software is installed, the project should be opened in Microsoft Visual Studio.
+•	If the correct software is installed, the project should be opened in Microsoft Visual Studio, then click clone.
 •	On the solution explorer, right-click on the solution and click “Restore NuGet Packages to ensure that any missing dependencies are installed.
 •	Using file explorer in your bin -> debug folder, ensure that there is a ‘.mdf’ file present as that represents the database, if not, then it should be copyable from the base project directory.
 •	Go to the ‘Build’ section in the menu bar and ‘Build Solution’ to ensure that the project can compile without errors and is ready for your device.
