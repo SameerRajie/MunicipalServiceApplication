@@ -101,11 +101,11 @@
             this.pBarEngagement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pBarEngagement.ForeColor = System.Drawing.Color.Yellow;
-            this.pBarEngagement.Location = new System.Drawing.Point(90, 596);
+            this.pBarEngagement.Location = new System.Drawing.Point(90, 590);
             this.pBarEngagement.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pBarEngagement.Maximum = 4;
             this.pBarEngagement.Name = "pBarEngagement";
-            this.pBarEngagement.Size = new System.Drawing.Size(1151, 60);
+            this.pBarEngagement.Size = new System.Drawing.Size(1155, 33);
             this.pBarEngagement.TabIndex = 4;
             // 
             // btnSubmit
@@ -123,6 +123,7 @@
             // 
             this.lblHeading.AutoSize = true;
             this.lblHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeading.ForeColor = System.Drawing.Color.White;
             this.lblHeading.Location = new System.Drawing.Point(186, 43);
             this.lblHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHeading.Name = "lblHeading";
@@ -134,6 +135,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(192, 143);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
@@ -145,6 +147,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(192, 202);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
@@ -156,6 +159,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(192, 273);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
@@ -205,12 +209,11 @@
             // 
             // lblProgress
             // 
-            this.lblProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblProgress.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblProgress.AutoSize = true;
             this.lblProgress.BackColor = System.Drawing.Color.Transparent;
             this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProgress.Location = new System.Drawing.Point(591, 661);
+            this.lblProgress.Location = new System.Drawing.Point(621, 625);
             this.lblProgress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(55, 32);
@@ -219,7 +222,7 @@
             // 
             // panelMenu
             // 
-            this.panelMenu.BackColor = System.Drawing.Color.Red;
+            this.panelMenu.BackColor = System.Drawing.Color.Black;
             this.panelMenu.Controls.Add(this.navBtnLogOut);
             this.panelMenu.Controls.Add(this.navBtnStatus);
             this.panelMenu.Controls.Add(this.navBtnEvents);
@@ -230,7 +233,7 @@
             this.panelMenu.ForeColor = System.Drawing.Color.Black;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(61, 699);
+            this.panelMenu.Size = new System.Drawing.Size(59, 666);
             this.panelMenu.TabIndex = 15;
             // 
             // navBtnLogOut
@@ -303,7 +306,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Red;
-            this.ClientSize = new System.Drawing.Size(1259, 699);
+            this.ClientSize = new System.Drawing.Size(1263, 666);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.lblAttachFileError);

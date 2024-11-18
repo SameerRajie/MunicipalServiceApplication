@@ -64,6 +64,7 @@
     <Compile Include="Announcement.cs" />
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="Controllers\DbHelper.cs" />
+    <Compile Include="Controllers\EventsAndAnnouncementsController.cs" />
     <Compile Include="Controllers\IssueController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Event.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="SignupForm.Designer.cs">
       <DependentUpon>SignupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StatusGraph.cs" />
     <Compile Include="TransparentPanel.cs">
       <SubType>Component</SubType>
     </Compile>

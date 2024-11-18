@@ -356,20 +356,10 @@ namespace MunicipalServiceApplication
 
         private void navBtnIssue_Click(object sender, EventArgs e)
         {
-            ReportIssuesPage reportIssuesPage = new ReportIssuesPage();
-
-            if (this.WindowState == FormWindowState.Maximized)
+            if (!isMenuCollapsed)
             {
-                reportIssuesPage.WindowState = FormWindowState.Maximized;
+                timerMenu.Enabled = true;
             }
-            else
-            {
-                reportIssuesPage.Size = this.Size;
-                reportIssuesPage.Location = this.Location;
-            }
-
-            reportIssuesPage.Show();
-            this.Hide();
         }
 
         private void navBtnEvents_Click(object sender, EventArgs e)
@@ -428,10 +418,20 @@ namespace MunicipalServiceApplication
 
         private void navBtnHome_Click(object sender, EventArgs e)
         {
-            if (!isMenuCollapsed)
+            Form1 form = new Form1();
+
+            if (this.WindowState == FormWindowState.Maximized)
             {
-                timerMenu.Enabled = true;
+                form.WindowState = FormWindowState.Maximized;
             }
+            else
+            {
+                form.Size = this.Size;
+                form.Location = this.Location;
+            }
+
+            form.Show();
+            this.Hide();
         }
 
         private void ReportIssuesPage_Click(object sender, EventArgs e)

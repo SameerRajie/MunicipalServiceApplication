@@ -14,11 +14,13 @@ namespace MunicipalServiceApplication
     public partial class LoginForm : Form
     {
         private UserController userController;
+        private IssueController issueController;
 
         public LoginForm()
         {
             InitializeComponent();
             userController = new UserController();
+            issueController = new IssueController();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -31,8 +33,22 @@ namespace MunicipalServiceApplication
                 MessageBox.Show("Login successful!");
                 // Redirect to main application form
                 Form1 mainForm = new Form1();
-                this.Hide();
+
+
+                issueController.GenerateDummyData(GetSet.userId);
+
+                if (this.WindowState == FormWindowState.Maximized)
+                {
+                    mainForm.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    mainForm.Size = this.Size;
+                    mainForm.Location = this.Location;
+                }
+
                 mainForm.Show();
+                this.Hide();
             }
             else
             {
@@ -44,8 +60,19 @@ namespace MunicipalServiceApplication
         {
             // Open the Signup form
             SignupForm signupForm = new SignupForm();
-            this.Hide();
+
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                signupForm.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                signupForm.Size = this.Size;
+                signupForm.Location = this.Location;
+            }
+
             signupForm.Show();
+            this.Hide();
         }
 
         private void cBoxShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -58,6 +85,11 @@ namespace MunicipalServiceApplication
             {
                 txtPassword.PasswordChar = '*';
             }
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

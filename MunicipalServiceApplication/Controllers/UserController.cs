@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MunicipalServiceApplication.Controllers
 {
@@ -18,8 +19,14 @@ namespace MunicipalServiceApplication.Controllers
 
         public bool Signup(string username, string password)
         {
+            if (String.IsNullOrEmpty(username) || String.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("Username cannot be empty.");
+            }
+
             if (db.UserExists(username))
             {
+                MessageBox.Show("Username already exists. Please choose another.");
                 return false; // User already exists
             }
 
@@ -35,7 +42,9 @@ namespace MunicipalServiceApplication.Controllers
                 return false; // User not found
             }
 
-            GetSet.userId = int.Parse(db.GetUser(username));
+            int id = int.Parse(db.GetUser(username));
+
+            GetSet.userId = id;
 
             return VerifyPassword(password, storedHashedPassword);
         }
